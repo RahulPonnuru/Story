@@ -3,15 +3,15 @@ name: Automation Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: ‘53 11 * * *’
-    - cron: ‘54 11 * * *’
+    - cron: ‘55 11 * * *’
+    - cron: ‘56 11 * * *’
 
 jobs:
   ui-chrome-smoke-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Smoke Test
-        if: github.event.schedule == '53 11 * * *'
+        if: github.event.schedule == '55 11 * * *'
         run: |
           echo "${{ github.event.schedule }}"
         
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Sanity Test
-        if: github.event.schedule == '54 11 * * *'
+        if: github.event.schedule == '56 11 * * *'
         run: |
           echo "hii ${{ github.event.schedule }}"
         
