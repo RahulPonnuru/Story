@@ -3,29 +3,36 @@ name: Automation Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 9 * * *'
-    - cron: '17 9 * * *'
+    - cron: '51 9 * * *'
+    - cron: '54 9 * * *'
 
 jobs:
   ui-chrome-smoke-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Smoke Test
-        if: github.event.schedule == '17 9 * * *'
-        run: |
-          echo "${{ github.event.schedule }}"
+      # - name: Smoke Test
+      #   if: github.event.schedule == '17 9 * * *'
+      #   run: |
+      #     echo "${{ github.event.schedule }}"
 
-      - name: Sanity Test
-        if: github.event.schedule == '15 9 * * *'
-        run: |
-          echo "hii ${{ github.event.schedule }}"
+      # - name: Sanity Test
+      #   if: github.event.schedule == '15 9 * * *'
+      #   run: |
+      #     echo "hii ${{ github.event.schedule }}"
        
-      - name: anity Test
-        run: |
-          echo "hii ${{ github.event.schedule }}"
+      # - name: anity Test
+      #   run: |
+      #     echo "hii ${{ github.event.schedule }}"
 
       - name: Print UTC Time
         run: |
-          echo "Current UTC Time: $(date -u)"
+          if [[ $github.event.schedule == '51 9 * * *' ]]; then
+            echo "ACCOUNT_ID=1234" >> "$GITHUB_ENV"
+          elif [[ $github.event.schedule == '54 9 * * *' ]]; then
+            echo "ACCOUNT_ID=6789" >> "$GITHUB_ENV"
+          fi
+      - name: Check
+        run: |
+          echo "${{ACCOUNT_ID}}"
         
       
