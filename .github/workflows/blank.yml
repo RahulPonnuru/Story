@@ -3,7 +3,6 @@ name: Automation Tests
 on:
   schedule:
     - cron: '* * * * *'
-    - cron: '* * * * *'
 
 jobs:
   ui-chrome-smoke-tests:
