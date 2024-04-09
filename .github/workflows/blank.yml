@@ -3,8 +3,8 @@ name: Automation Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '51 9 * * *'
-    - cron: '54 9 * * *'
+    - cron: '57 9 * * *'
+    - cron: '59 9 * * *'
 
 jobs:
   ui-chrome-smoke-tests:
@@ -26,13 +26,13 @@ jobs:
 
       - name: Print UTC Time
         run: |
-          if [[ $github.event.schedule == '51 9 * * *' ]]; then
+          if [[ $github.event.schedule == '57 9 * * *' ]]; then
             echo "ACCOUNT_ID=1234" >> "$GITHUB_ENV"
-          elif [[ $github.event.schedule == '54 9 * * *' ]]; then
+          elif [[ $github.event.schedule == '59 9 * * *' ]]; then
             echo "ACCOUNT_ID=6789" >> "$GITHUB_ENV"
           fi
       - name: Check
         run: |
-          echo "${{ACCOUNT_ID}}"
+          echo "$ACCOUNT_ID"
         
       
