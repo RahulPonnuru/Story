@@ -1,8 +1,8 @@
 name: Automation Tests
 
 on:
-  schedule:
-    - cron: '* * * * *'
+  # schedule:
+  #   - cron: '* * * * *'
 
 jobs:
   ui-chrome-smoke-tests:
