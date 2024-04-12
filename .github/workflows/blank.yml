@@ -2,8 +2,8 @@ name: Automation Tests
 
 on:
   schedule:
-    - cron: '55 9 * * *'
-    - cron: '57 9 * * *'
+    - cron: '25 10 * * *'
+    - cron: '27 10 * * *'
 
 jobs:
   setup:
@@ -14,9 +14,9 @@ jobs:
       - name: Check branch
         id: step1
         run: |
-          if [ ${{ github.event.schedule }} == '55 9 * * *' ]; then
+          if [[ $github.event.schedule == '25 10 * * *' ]]; then
             echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
-          elif [ ${{ github.event.schedule }} == '57 9 * * *' ]; then
+          elif [[ $github.event.schedule == '27 10 * * *' ]]; then
             echo "runner=macos-latest" >> $GITHUB_OUTPUT
           fi
 
