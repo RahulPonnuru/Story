@@ -21,6 +21,8 @@ jobs:
           elif [[ $github.event.schedule == '16 11 * * *' ]]; then
             echo "${{ github.event.schedule }}"
             echo "runner=macos-latest" >> $GITHUB_OUTPUT
+          else
+            echo "runner=macos-latest" >> $GITHUB_OUTPUT
           fi
 
   job1:
