@@ -1,7 +1,9 @@
 name: Automation Tests
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '55 9 * * *'
+    - cron: '57 9 * * *'
 
 jobs:
   setup:
@@ -12,9 +14,9 @@ jobs:
       - name: Check branch
         id: step1
         run: |
-          if [ ${{ github.ref }} == 'refs/heads/main' ]; then
+          if [ ${{ github.event.schedule }} == '55 9 * * *' ]; then
             echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
-          else
+          elif [ ${{ github.event.schedule }} == '57 9 * * *' ]; then
             echo "runner=macos-latest" >> $GITHUB_OUTPUT
           fi
 
