@@ -4,32 +4,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  ui-chrome-smoke-tests:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.step1.outputs.runner }}
     steps:
-      # - name: Smoke Test
-      #   if: github.event.schedule == '17 9 * * *'
-      #   run: |
-      #     echo "${{ github.event.schedule }}"
-
-      # - name: Sanity Test
-      #   if: github.event.schedule == '15 9 * * *'
-      #   run: |
-      #     echo "hii ${{ github.event.schedule }}"
-       
-      # - name: anity Test
-      #   run: |
-      #     echo "hii ${{ github.event.schedule }}"
-
-      - name: Print UTC Time
+      - name: Check branch
+        id: step1
         run: |
-          if [[ $github.event.schedule == '11 10 * * *' ]]; then
-            echo "ACCOUNT_ID=1234" >> "$GITHUB_ENV"
-          elif [[ $github.event.schedule == '13 10 * * *' ]]; then
-            echo "ACCOUNT_ID=6789" >> "$GITHUB_ENV"
+          if [ ${{ github.ref }} == 'refs/heads/main' ]; then
+            echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
+          else
+            echo "runner=macos-latest" >> $GITHUB_OUTPUT
           fi
-      - name: Check
-        run: |
-          echo "$ACCOUNT_ID"
-        
+
+  job1:
+    needs: [setup]
+    runs-on: ${{ needs.setup.outputs.runner }}
+    steps:
+      - run: echo "My runner is ${{ needs.setup.outputs.runner }}" #ubuntu-latest if main branch
+  
       
