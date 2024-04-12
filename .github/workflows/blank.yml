@@ -22,6 +22,7 @@ jobs:
             echo "${{ github.event.schedule }}"
             echo "runner=macos-latest" >> $GITHUB_OUTPUT
           else
+            echo "Hii"
             echo "runner=macos-latest" >> $GITHUB_OUTPUT
           fi
 
